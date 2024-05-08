@@ -20,11 +20,11 @@ router.post('/signup', asyncHandler(async (req, res) => {
         handicap
     } = req.body;
 
-if (!username || !email || !password) {
-    res.status(400);
-    throw new Error('Please fill out all fields');
-}
-
+    if (!username || !email || !password) {
+        res.status(400);
+        throw new Error('Please fill out all fields');
+    }
+    
 // Check if user already exists
 const userExists = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
 if (userExists.rows.length > 0) {
